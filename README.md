@@ -28,6 +28,37 @@ Python 3, NumPy, pandas, matplotlib, and Larch.
 This repository does not include unpublished experimental data. Users should
 provide their own time-stamped XAFS files and electrochemical data.
 
+## Data setup
+
+Place the input files in a folder named `data` in the same directory as the notebook:
+
+```text
+operando-xafs-time-alignment/
+├── operando-xafs-time-alignment.ipynb
+└── data/
+    ├── LNO_freshcell_highvoltage_C01.csv
+    ├── scan_001.dat
+    ├── scan_002.dat
+    └── ...
+```
+
+The notebook searches for XAFS files using:
+
+```python
+data_dir = 'data'
+filepaths = sorted(glob.glob(os.path.join(data_dir, '*.dat')))
+```
+
+Therefore, all XAFS `.dat` files must be placed in the `data/` folder.
+
+The electrochemical file is currently loaded using:
+
+```python
+ec = pd.read_csv('data/LNO_freshcell_highvoltage_C01.csv')
+```
+
+To use a different electrochemical file, place it in the `data/` folder and update the filename in this line. The CSV is expected to contain time, voltage, current and capacity columns in the same order as the supplied dataset.
+
 ## Author
 
 Alisa Yakovenko, BSc (Hons) Physics, University of Edinburgh.
